@@ -1,0 +1,230 @@
+---
+title: "HW5"
+author: "Katie"
+date: "2023"
+output:
+  html_document:
+    toc: true
+    toc-location: left
+    code-fold: true
+    theme: yeti
+execute:
+  message: false
+  warning: false
+---
+
+```{r}
+# should haves (from last week)
+library(tidyverse)
+library(here)
+library(janitor)
+library(ggeffects)
+library(performance)
+library(naniar) # or equivalent
+library(flextable) # or equivalent
+library(car)
+library(broom)
+# would be nice to have
+library(corrplot)
+library(AICcmodavg)
+library(GGally)
+```
+
+read in data
+```{r read-data}
+plant <- read_csv(here("data", "knb-lter-hfr.109.18","hf109-01-sarracenia.csv")) %>% 
+  # make column names cleaner
+  clean_names() %>% 
+  # select columns of interest 
+  select(totmass, species, feedlevel, sla, chlorophyll, amass, num_lvs, num_phylls)
+
+```
+
+```{r miss-vis}
+gg_miss_var(plant)
+```
+
+subset dropping NA
+```{r}
+plant_subset <- plant %>% 
+  drop_na(sla, chlorophyll, amass, num_phylls, num_lvs)
+```
+
+create a correlation plot
+
+"to determine the relationships between numerical variables in our dataset, we calculated pearsons r and visually represented correlation using a correlation plot"
+```{r correlation-plot}
+# calculate Pearson's r for numerical values only
+plant_cor <- plant_subset %>% 
+  select(feedlevel:num_phylls) %>% 
+  cor(method = "pearson")
+#returns matrix of numerical values
+
+#create a correlation plot 
+corrplot(plant_cor,
+         #change shape of cells 
+         method = "ellipse",
+         addCoef.col = "black")
+
+#don't include two predictors (eg mass) because can conflate r^2
+
+
+
+```
+
+create a plot of each variable compared against others
+```{r}
+#pair plot can include categorical measurement
+plant_subset %>% 
+  select(species:num_phylls) %>% 
+  ggpairs()
+```
+
+starting regression here:
+"to determine how species and physiological characters predict bimass, we fit multiple linear models"
+```{r}
+# null = no predictors
+null <- lm(totmass ~ 1, data = plant_subset)
+# full = response and all potential predictors 
+full <- lm(totmass ~ species + feedlevel + sla + chlorophyll + amass + num_lvs + num_phylls, data = plant_subset)
+```
+
+we visually asses normality and homoskedasticity of residuals using diagnostic plots for full model 
+```{r}
+par(mfrow = c(2,2))
+plot(full)
+```
+
+We also tested for normality using Shapiro-Wilk test (null: variable of interest (ie residuals) are normally distributed). 
+We tested for heteroskedasticity using Breusch-Pagan test (null: variable of interest has constant variance)
+```{r}
+check_normality(full)
+check_heteroscedasticity(full)
+```
+Non-normality & Heteroscedasticity;
+Assumptions of linear regression are not met!
+
+mathematical transformation can make data betta
+(only transform response, predictors can stay on the same scale)
+```{r}
+# log transform response
+null_log <- lm(log(totmass) ~ 1, data = plant_subset)
+full_log <- lm(log(totmass) ~ species + feedlevel + sla + chlorophyll + amass + num_lvs + num_phylls, data = plant_subset)
+
+plot(full_log)
+```
+
+
+check normality of full model with log transform
+```{r}
+# do any combo of predictors inflate the data (because they're related)
+check_normality(full_log)
+check_heteroscedasticity(full_log)
+```
+
+
+they're good now! meeting assumption on linear regression
+all interpretation will be based on a transformed response 
+
+
+Evaluate multicolinearity
+```{r}
+car::vif(full_log)
+```
+We evaluated multcol by calculating generalized variance inflation factor and determined that there are no related predictors which inflate the data.
+
+try some models 
+addressing question: what set of predictor variables best explains the response
+
+```{r}
+# species predicts biomass?
+
+model2_log <- lm(log(totmass) ~ species, data = plant_subset)
+```
+
+```{r}
+# check assumptions for model 
+
+plot(model2_log)
+# clumps = predictor categorical, all good
+
+check_normality(model2_log)
+check_heteroscedasticity(model2_log)
+# conforms to assumptions of linear regression!
+```
+
+compare models using Akaike Info Criterion (AIC) values:
+(looks for the simplest model that explains the most variance)
+```{r}
+AICc(full_log)
+AICc(model2_log)    
+AICc(null_log)
+# least complex model that best predicts the response is full model (lowest value)
+```
+
+```{r}
+MuMIn::AICc(full_log, model2_log, null_log)
+# if you want to do them all at once 
+
+MuMIn::model.sel(full_log, model2_log, null_log)
+# more info, yay!
+```
+
+we compared models using AIC and chose the model with the lowest value which was..
+
+
+# Results 
+
+we found that the __ model including __ __ __ predictors best predicted __ (model summary). 
+
+```{r}
+summary(full_log)
+
+table <- tidy(full_log, conf.int = TRUE) %>% 
+  #change the p-value numbers if they tiny (>0.001)
+  # change est, SE, and t-stat to round to 
+  #using mutate
+  #make into flex table 
+  flextable() %>% 
+  #fit it to viewer
+  autofit()
+  
+
+table
+```
+
+back transform estimates by exponentiating (because we took log)
+```{r}
+model_pred <- ggpredict(full_log, terms = "species", back.transform = TRUE)
+
+# reporting results in original variable is fine if you tell ppl that 
+
+# "log transformed to meet assumptions, back transformed for ease of communication of results"
+```
+
+```{r}
+model_pred
+```
+
+all else held constant, we would expect total mass to be around predicted +/- CI. 
+
+```{r}
+# plot to visualize relationships in data (can choose significant from summary(full_log))
+plot(ggpredict(full_log, terms = "species", back.transform = TRUE), add.data = TRUE)
+
+plot(ggpredict(full_log, terms = "chlorophyll", back.transform = TRUE), add.data = TRUE)
+
+# choose which figure best represents the main take away of your analysis
+```
+
+
+# different types of ANOVA 
+
+type 1: order matter; species > feed level > etc
+type 2: order doesnt mateer but there may be interaction
+type 3: order and interaction matters
+
+```{r}
+
+```
+
