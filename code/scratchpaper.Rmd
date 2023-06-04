@@ -131,7 +131,7 @@ Evaluate multicolinearity
 ```{r}
 car::vif(full_log)
 ```
-We evaluated multcol by calculating generalized variance inflation factor and determined that there are no related predictors which inflate the data.
+We evaluated multicolinearity by calculating generalized variance inflation factor and determined that there are no related predictors which inflate the data.
 
 try some models 
 addressing question: what set of predictor variables best explains the response
@@ -159,6 +159,7 @@ compare models using Akaike Info Criterion (AIC) values:
 AICc(full_log)
 AICc(model2_log)    
 AICc(null_log)
+AICc(model3_log)
 # least complex model that best predicts the response is full model (lowest value)
 ```
 
@@ -180,6 +181,9 @@ we found that the __ model including __ __ __ predictors best predicted __ (mode
 ```{r}
 summary(full_log)
 
+```
+
+```{r}
 table <- tidy(full_log, conf.int = TRUE) %>% 
   #change the p-value numbers if they tiny (>0.001)
   # change est, SE, and t-stat to round to 
@@ -228,3 +232,33 @@ type 3: order and interaction matters
 
 ```
 
+
+
+# for my HW
+possible predictors of biomass are
+species + feedlevel + sla + çhlorophyll + amass + num_lvs + num_phylls
+
+```{r}
+plot(ggpredict(full_log, terms = "amass", back.transform = TRUE), add.data = TRUE)
+```
+
+```{r}
+model3_log <- lm(log(totmass) ~ chlorophyll, data = plant_subset)
+
+plot(model3_log)
+# clumps = predictor categorical, all good
+
+```
+
+```{r}
+check_normality(model3_log)
+check_heteroscedasticity(model3_log)
+```
+
+```{r}
+MuMIn::AICc(full_log, model2_log, null_log, model3_log)
+```
+
+* sla, 275
+** amass, 295
+*** species,158

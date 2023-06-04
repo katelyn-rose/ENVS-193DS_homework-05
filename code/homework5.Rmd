@@ -1,0 +1,89 @@
+---
+title: "Homework 5: how do Sarracenia characteristics predict biomass?"
+author: "Katie Miller"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: TRUE
+    toc-location: left
+    code-fold: TRUE
+    theme: yeti
+execute:
+  message: FALSE
+  warning: FALSE
+---
+
+# Introduction
+
+```{r packages}
+# loading in necessary packages
+library(tidyverse)
+library(here)
+library(janitor)
+library(ggeffects)
+library(performance)
+library(naniar) # or equivalent
+library(flextable) # or equivalent
+library(car)
+library(broom)
+# would be nice to have
+library(corrplot)
+library(AICcmodavg)
+library(GGally)
+```
+
+
+```{r read-data}
+# reading in the data, filtering for clarity and relevancy
+plant <- read_csv(here("data", "knb-lter-hfr.109.18","hf109-01-sarracenia.csv")) %>% 
+  # make column names cleaner
+  clean_names() %>% 
+  # select columns of interest 
+  select(totmass, species, feedlevel, sla, chlorophyll, amass, num_lvs, num_phylls)
+```
+
+
+# Methods
+Species
+
+a. Sampling methods (these should be summarized from the metadata and cited)
+
+b. Description of data organization and processing (1-3 sentences)
+
+c. We began by creating a visualization of the missing data in our entire dataset (Figure 1). 
+Visualization of missing observations with an accompanying caption and discussion
+(caption: 1-3 sentences, discussion: 1-3 sentences)
+
+d. Visualization of Pearson’s correlation between variables with an accompanying
+caption and discussion (caption: 1-3 sentences, discussion: 1-3 sentences)
+
+e. Visualization of relationships between variables (not correlation) with an
+accompanying caption and discussion (caption: 1-3 sentences, discussion: 1-3
+sentences)
+
+f. Creating the null and full model with accompanying discussion (1-3 sentences)
+g. Visual and statistical assumption checks for the full model with accompanying
+discussion (1-3 sentences)
+
+h. Explanation of any transformation and justification (1-3 sentences)
+
+i. Model construction with visual and statistical assumption checks for three
+additional models with justification (i.e. why did you choose those predictor
+variables?) (justification: 1-3 sentences per model)
+
+j. Variance inflation factor check for the full model with accompanying discussion
+(discussion: 1-3 sentences)
+
+k. Model comparison using the null model, full model, and additional models from part
+7g
+
+```{r figure-1}
+# visualize missing data 
+gg_miss_var(plant)
+```
+
+
+# Results 
+Species:
+
+# Bibliography
