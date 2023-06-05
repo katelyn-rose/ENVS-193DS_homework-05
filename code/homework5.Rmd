@@ -4,16 +4,13 @@ author: "Katie Miller"
 date: "`r Sys.Date()`"
 output:
   html_document:
-    toc: TRUE
+    toc: true
     toc-location: left
-    code-folding: true
+    code_folding: true
     theme: yeti
-execute:
-  message: FALSE
-  warning: FALSE
 ---
 
-```{r}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
@@ -88,6 +85,11 @@ k. Model comparison using the null model, full model, and additional models from
 gg_miss_var(plant) + labs(caption = "Figure 1.")
 ```
 
+```{r drop-NA}
+plant_subset <- plant %>% 
+  drop_na(sla, chlorophyll, amass, num_phylls, num_lvs)
+```
+
 ```{r figure-2}
 # calculate Pearson's r for numerical values only
 plant_cor <- plant_subset %>% 
@@ -102,6 +104,12 @@ corrplot(plant_cor,
          addCoef.col = "black")
 ```
 
+```{r figure-3}
+# pair plot can include categorical measurement
+plant_subset %>% 
+  select(species:num_phylls) %>% 
+  ggpairs()
+```
 
 # Results 
 Species:
