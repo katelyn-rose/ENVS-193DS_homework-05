@@ -1,18 +1,17 @@
 ---
-title: "Homework 5: how do Sarracenia characteristics predict biomass?"
+title: "Homework 5"
 author: "Katie Miller"
-date: "`r Sys.Date()`"
-output:
-  html_document:
+format:
+  html:
     toc: true
     toc-location: left
-    code_folding: true
+    code-fold: true
     theme: yeti
+execute:
+  message: false
+  warning: false
+editor: visual
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-```
 
 # Introduction
 
@@ -98,7 +97,7 @@ k. Model comparison using the null model, full model, and additional models from
 ### Methods Code
 
 Figure 1:
-```{r figure-1}
+```{r methods-code}
 # Figure 1: visualize missing data
 gg_miss_var(plant) + labs(caption = "Figure 1.")
 
@@ -117,8 +116,8 @@ plant_cor <- plant_subset %>%
 corrplot(plant_cor,
          #change shape of cells 
          method = "ellipse",
-         addCoef.col = "black") +
-  labs(caption = "Figure 2.")
+         addCoef.col = "black",
+         title = "Figure 2.") 
 
 
 # Figure 3: pair plot
@@ -134,7 +133,7 @@ full <- lm(totmass ~ species + feedlevel + sla + chlorophyll + amass + num_lvs +
 
 # Full model visual assumptions check
 par(mfrow = c(2,2))
-plot(full) + labs(caption = "Table x. Visual check of assumptions for the full model")
+plot(full, caption = "Table x. Visual check of assumptions for the full model")
 
 # Full model stats assumptions check 
 check_normality(full)
@@ -147,27 +146,45 @@ full_log <- lm(log(totmass) ~ species + feedlevel + sla + chlorophyll + amass + 
 # Assumptions
 # Log model visual assumptions check
 par(mfrow = c(2,2))
-plot(full_log) + labs(caption = "Table x. Visual check of assumptions for the Log model")
+plot(full_log, caption = "Table x. Visual check of assumptions for the log model")
 
 # Log model stats assumptions check 
 check_normality(full_log)
 check_heteroscedasticity(full_log)
 
 # Figure 4: model 1 
+# species predicts biomass?
+model1_log <- lm(log(totmass) ~ species, data = plant_subset)
 
-# Assumption
+# Assumptions
+# model 1 visual assumptions check
+par(mfrow = c(2,2))
+plot(model1_log, caption = "Table x. Visual check of assumptions for the log model")
+
+# model stats assumptions check 
+check_normality(model1_log)
+check_heteroscedasticity(model1_log)
 
 # Figure 5: model 2
 
 # Assumptions
 
 # Figure 6: model 3
+# species predicts biomass?
+model3_log <- lm(log(totmass) ~ species + sla + feedlevel + chlorophyll + num_lvs, data = plant_subset)
+
+plot(model3_log)
+
+# model stats assumptions check 
+check_normality(model3_log)
+check_heteroscedasticity(model3_log)
+
 
 # Variance Inflation Factor (VIF) to evaluate multicolinearity
-car::vif(full_log)
+car::vif(full_log, caption = "Table x.")
 
 # Akaike Info Criterion (AIC)
-# MuMIn::model.sel(full_log, model2_log, null_log)
+# MuMIn::model.sel(full_log, null_log, model1_log, model2_log, model3_log)
 ```
 
 
