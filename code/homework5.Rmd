@@ -2,7 +2,7 @@
 title: "Homework 5: how do Sarracenia characteristics predict biomass?"
 author: "Katie Miller"
 date: "`r Sys.Date()`"
-output:
+format:
   html_document:
     toc: true
     toc-location: left
@@ -63,7 +63,7 @@ Visualization of relationships between variables (not correlation) with an
 accompanying caption and discussion (caption: 1-3 sentences, discussion: 1-3
 sentences)
 
-f. To determine how species and physiological characters predict biomass, we fit multiple linear models. We started by creating a full model using the entire subset of variables of interest, with total mass ($g$) as the response variable, and the predictor variables being the species of Sarracenia, feedlevel ($g$), specific leaf area ($cm^2/g$), chlorophyll a + b content ($mg/g$), photosynthetic rate ($nmol CO2 * g^-1 * s^-1$), number of phyllodes, and number of pitchers and  phyllodes. The null model does not contain our predictor variables, only the response variable. Unfortunately, the full model did not meet the assumptions for linear regression. 
+f. To determine how species and physiological characters predict biomass, we fit multiple linear models. We started by creating a full model using the entire subset of variables of interest, with total mass ($g$) as the response variable, and the predictor variables being the species of Sarracenia, feedlevel ($g$), specific leaf area ($cm^2/g$), chlorophyll a + b content ($mg/g$), photosynthetic rate ($nmol CO2 * g^-1 * s^-1$), number of phyllodes, and number of pitchers and  phyllodes. The null model does not contain our predictor variables, only the response variable. We tested our full model for normality using Shapiro-Wilk test and for heteroskedasticity using Breusch-Pagan test. Unfortunately, the full model was non-normal & heteroscedastic, therefore did not meet the assumptions for linear regression. To combat this, we performed a mathematical transformation by taking the log of the response variable. 
 Creating the null and full model with accompanying discussion (1-3 sentences)
 
 g. Visual and statistical assumption checks for the full model with accompanying
