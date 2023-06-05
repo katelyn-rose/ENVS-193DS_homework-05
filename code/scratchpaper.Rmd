@@ -74,7 +74,7 @@ corrplot(plant_cor,
 
 create a plot of each variable compared against others
 ```{r}
-#pair plot can include categorical measurement
+# pair plot can include categorical measurement
 plant_subset %>% 
   select(species:num_phylls) %>% 
   ggpairs()
@@ -110,6 +110,7 @@ mathematical transformation can make data betta
 # log transform response
 null_log <- lm(log(totmass) ~ 1, data = plant_subset)
 full_log <- lm(log(totmass) ~ species + feedlevel + sla + chlorophyll + amass + num_lvs + num_phylls, data = plant_subset)
+
 
 plot(full_log)
 ```
@@ -236,14 +237,14 @@ type 3: order and interaction matters
 
 # for my HW
 possible predictors of biomass are
-species + feedlevel + sla + çhlorophyll + amass + num_lvs + num_phylls
+species + feedlevel + sla + chlorophyll + amass + num_lvs + num_phylls
 
 ```{r}
 plot(ggpredict(full_log, terms = "amass", back.transform = TRUE), add.data = TRUE)
 ```
 
 ```{r}
-model3_log <- lm(log(totmass) ~ chlorophyll, data = plant_subset)
+model3_log <- lm(log(totmass) ~ num_lvs + amass, data = plant_subset)
 
 plot(model3_log)
 # clumps = predictor categorical, all good
@@ -262,3 +263,16 @@ MuMIn::AICc(full_log, model2_log, null_log, model3_log)
 * sla, 275
 ** amass, 295
 *** species,158
+
+
+```{r}
+sp_log <- lm(log(totmass) ~ feedlevel + sla + chlorophyll + amass + num_lvs + num_phylls, data = plant_subset)
+
+plot(sp_log)
+```
+
+
+```{r}
+check_normality(sp_log)
+check_heteroscedasticity(sp_log)
+```

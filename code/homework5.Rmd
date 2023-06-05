@@ -6,14 +6,19 @@ output:
   html_document:
     toc: TRUE
     toc-location: left
-    code-fold: TRUE
+    code-folding: true
     theme: yeti
 execute:
   message: FALSE
   warning: FALSE
 ---
 
+```{r}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
 # Introduction
+
 
 ```{r packages}
 # loading in necessary packages
@@ -54,7 +59,8 @@ c. We began by creating a visualization of the missing data in our entire datase
 Visualization of missing observations with an accompanying caption and discussion
 (caption: 1-3 sentences, discussion: 1-3 sentences)
 
-d. Visualization of Pearson’s correlation between variables with an accompanying
+d. In order to determine the relationships between numerical variables in our dataset, we calculated Pearson's r and visually represented correlation using a correlation plot (Figure 2).
+"Visualization of Pearson’s correlation between variables with an accompanying
 caption and discussion (caption: 1-3 sentences, discussion: 1-3 sentences)
 
 e. Visualization of relationships between variables (not correlation) with an
@@ -79,7 +85,21 @@ k. Model comparison using the null model, full model, and additional models from
 
 ```{r figure-1}
 # visualize missing data 
-gg_miss_var(plant)
+gg_miss_var(plant) + labs(caption = "Figure 1.")
+```
+
+```{r figure-2}
+# calculate Pearson's r for numerical values only
+plant_cor <- plant_subset %>% 
+  select(feedlevel:num_phylls) %>% 
+  cor(method = "pearson")
+#returns matrix of numerical values
+
+#create a correlation plot 
+corrplot(plant_cor,
+         #change shape of cells 
+         method = "ellipse",
+         addCoef.col = "black")
 ```
 
 
