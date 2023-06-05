@@ -2,7 +2,7 @@
 title: "HW5"
 author: "Katie"
 date: "2023"
-format:
+output:
   html_document:
     toc: true
     toc-location: left
@@ -226,12 +226,9 @@ plot(ggpredict(full_log, terms = "chlorophyll", back.transform = TRUE), add.data
 # different types of ANOVA 
 
 type 1: order matter; species > feed level > etc
-type 2: order doesnt mateer but there may be interaction
+type 2: order doesnt matter but there may be interaction
 type 3: order and interaction matters
 
-```{r}
-
-```
 
 
 
@@ -244,7 +241,7 @@ plot(ggpredict(full_log, terms = "amass", back.transform = TRUE), add.data = TRU
 ```
 
 ```{r}
-model3_log <- lm(log(totmass) ~ num_lvs + amass, data = plant_subset)
+model3_log <- lm(log(totmass) ~ species + sla + feedlevel + chlorophyll + num_lvs, data = plant_subset)
 
 plot(model3_log)
 # clumps = predictor categorical, all good
@@ -263,6 +260,7 @@ MuMIn::AICc(full_log, model2_log, null_log, model3_log)
 * sla, 275
 ** amass, 295
 *** species,158
+
 
 
 ```{r}

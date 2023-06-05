@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 # Introduction
 
-
+### Introduction Code:
 ```{r packages}
 # loading in necessary packages
 library(tidyverse)
@@ -24,16 +24,14 @@ library(here)
 library(janitor)
 library(ggeffects)
 library(performance)
-library(naniar) # or equivalent
-library(flextable) # or equivalent
+library(naniar)
+library(flextable) 
 library(car)
 library(broom)
-# would be nice to have
 library(corrplot)
 library(AICcmodavg)
 library(GGally)
 ```
-
 
 ```{r read-data}
 # reading in the data, filtering for clarity and relevancy
@@ -56,19 +54,23 @@ c. We began by creating a visualization of the missing data in our entire datase
 Visualization of missing observations with an accompanying caption and discussion
 (caption: 1-3 sentences, discussion: 1-3 sentences)
 
-d. In order to determine the relationships between numerical variables in our dataset, we calculated Pearson's r and visually represented correlation using a correlation plot (Figure 2).
+d. In order to examine the relationships between the numerical variables in our dataset, we calculated Pearson's r and visually represented the correlation using a correlation plot (Figure 2). 
 "Visualization of Pearson’s correlation between variables with an accompanying
 caption and discussion (caption: 1-3 sentences, discussion: 1-3 sentences)
 
-e. Visualization of relationships between variables (not correlation) with an
+e. (Figure 3) 
+Visualization of relationships between variables (not correlation) with an
 accompanying caption and discussion (caption: 1-3 sentences, discussion: 1-3
 sentences)
 
-f. Creating the null and full model with accompanying discussion (1-3 sentences)
+f. To determine how species and physiological characters predict biomass, we fit multiple linear models. We started by creating a full model using the entire subset of variables of interest, with total mass ($g$) as the response variable, and the predictor variables being the species of Sarracenia, feedlevel ($g$), specific leaf area ($cm^2/g$), chlorophyll a + b content ($mg/g$), photosynthetic rate ($nmol CO2 * g^-1 * s^-1$), number of phyllodes, and number of pitchers and  phyllodes. The null model does not contain our predictor variables, only the response variable. Unfortunately, the full model did not meet the assumptions for linear regression. 
+Creating the null and full model with accompanying discussion (1-3 sentences)
+
 g. Visual and statistical assumption checks for the full model with accompanying
 discussion (1-3 sentences)
 
-h. Explanation of any transformation and justification (1-3 sentences)
+h. Log transform
+Explanation of any transformation and justification (1-3 sentences)
 
 i. Model construction with visual and statistical assumption checks for three
 additional models with justification (i.e. why did you choose those predictor
@@ -80,38 +82,59 @@ j. Variance inflation factor check for the full model with accompanying discussi
 k. Model comparison using the null model, full model, and additional models from part
 7g
 
+
+### Methods Code
+
+Figure 1:
 ```{r figure-1}
+# Figure 1
 # visualize missing data 
 gg_miss_var(plant) + labs(caption = "Figure 1.")
-```
 
-```{r drop-NA}
-plant_subset <- plant %>% 
+
+# creating a subset of the data dropping NA values shown in Figure 1
+plant_subset <- plant %>%  
   drop_na(sla, chlorophyll, amass, num_phylls, num_lvs)
-```
 
-```{r figure-2}
+
+# Figure 2 
 # calculate Pearson's r for numerical values only
 plant_cor <- plant_subset %>% 
   select(feedlevel:num_phylls) %>% 
   cor(method = "pearson")
 #returns matrix of numerical values
 
+
 #create a correlation plot 
 corrplot(plant_cor,
          #change shape of cells 
          method = "ellipse",
          addCoef.col = "black")
-```
 
-```{r figure-3}
+
+# Figure 3
 # pair plot can include categorical measurement
 plant_subset %>% 
   select(species:num_phylls) %>% 
   ggpairs()
+
+# Full and null models of filtered data
+
+# Assumptions 
+
+# Log transformation
+
+# Assumptions
+
 ```
 
+
 # Results 
+species alone can be a good predictor but is not the best because it excludes
+(species + sla + feedlevel + chlorophyll + num_lvs)
+
+number of pitchers and phylodes
+use MuMIn::dredge()      best: chl, fdl, num_lvs, sla
 Species:
 
 # Bibliography
