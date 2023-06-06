@@ -74,10 +74,12 @@ Explanation of any transformation and justification (1-3 sentences)
 i. Using this log model, we set out to determine which set of predictor variables best explains the response in total mass. We found that species alone is a good predictor of total mass. 
 Figure 4: model 1, species (not enough)
 
+
 Assumption
 
 Figure 5: model 2, 
 
+To create the second model, we removed the predictor variable with the low correlation with biomass, which was the  returns a viable model. Looking at a model with relatively many predictor variables 
 Assumptions
 
 Figure 6: model 3, goldilocks

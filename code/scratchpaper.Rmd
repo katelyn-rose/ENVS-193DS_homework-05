@@ -241,7 +241,7 @@ plot(ggpredict(full_log, terms = "amass", back.transform = TRUE), add.data = TRU
 ```
 
 ```{r}
-model3_log <- lm(log(totmass) ~ species + sla + feedlevel + chlorophyll + num_lvs, data = plant_subset)
+model3_log <- lm(log(totmass) ~ species + feedlevel + sla + chlorophyll + num_lvs + num_phylls, data = plant_subset)
 
 plot(model3_log)
 # clumps = predictor categorical, all good
