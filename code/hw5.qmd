@@ -79,7 +79,7 @@ Assumption
 
 Figure 5: model 2, 
 
-To create the second model, we removed the predictor variable with the low correlation with biomass, which was the  returns a viable model. Looking at a model with relatively many predictor variables 
+To create the second model, we removed the predictor variable with the lowest correlation with biomass, which was the photosynthetic rate.  Looking at a model with relatively many predictor variables 
 Assumptions
 
 Figure 6: model 3, goldilocks
@@ -191,11 +191,31 @@ car::vif(full_log, caption = "Table x.")
 
 
 # Results 
-species alone can be a good predictor but is not the best because it excludes
+Model 1 showing species alone can be a good predictor
+but is not the best because it excludes 
+Conversely, Model 2 includes predictor variables with little correlation to the response which negatively effects the accuracy of the overall model.
+Model 3 is the best model because it is the simplest as determined by AIC 
+Akaike Info Criterion (AIC) from Table x values show that  Model 3 is the simplest model that explains the most variance.
 (species + sla + feedlevel + chlorophyll + num_lvs)
 
 number of pitchers and phylodes
 use MuMIn::dredge()      best: chl, fdl, num_lvs, sla
 Species:
+
+### Results Code
+```{r}
+summary(model3_log)
+```
+
+```{r}
+model_pred <- ggpredict(model3_log, terms = "num_lvs", back.transform = TRUE)
+
+model_pred
+```
+
+```{r}
+plot(ggpredict(model3_log, terms = "num_lvs", back.transform = TRUE), add.data = TRUE)
+```
+
 
 # Bibliography
