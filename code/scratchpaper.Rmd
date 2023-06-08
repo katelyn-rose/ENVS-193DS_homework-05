@@ -261,10 +261,20 @@ MuMIn::AICc(full_log, model2_log, null_log, model3_log)
 ** amass, 295
 *** species,158
 
+MuMIn::dredge()
+```{r}
+MuMIn::dredge(na.omit(full_log))
+```
 
 
 ```{r}
-sp_log <- lm(log(totmass) ~ feedlevel + sla + chlorophyll + amass + num_lvs + num_phylls, data = plant_subset)
+sp_log <- lm(log(totmass) ~ feedlevel + sla + num_phylls, data = plant_subset)
+
+plot(sp_log)
+```
+
+```{r}
+sp_log <- lm(log(totmass) ~ num_lvs + feedlevel, data = plant_subset)
 
 plot(sp_log)
 ```

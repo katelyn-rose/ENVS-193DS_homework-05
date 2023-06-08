@@ -68,6 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="hw5_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="hw5_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="hw5_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="hw5_files/libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+<script src="hw5_files/libs/tabwid-1.1.3/tabwid.js"></script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -204,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="hw5_files/figure-html/corr-plot-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Figure 2. Plot of correlation between variables.</strong> These values were calculated using Pearson’s r.</p>
+<p><strong>Figure 2. Plot of correlation between variables.</strong> These values were calculated using Pearson’s r to represent the correlation between all of our variables of interest.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -217,7 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="hw5_files/figure-html/pairs-plot-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Figure 3. Pair plot.</strong></p>
+<p><strong>Figure 3. Pair plot.</strong> This plot displays the relationships between our variables of interest.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -239,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="hw5_files/figure-html/full-vis-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Figure 4. Visual check of assumptions for the full model</strong></p>
+<p><strong>Figure 4. Visual check of assumptions for the full model</strong> This model shows non-normality of residuals and heteroscedasticity.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -273,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="hw5_files/figure-html/log-transform-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Figure 5. Visual check of assumptions for the log model</strong></p>
+<p><strong>Figure 5. Visual check of assumptions for the log model</strong> The log transformed model shows normal residuals and homoscedasticity.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -306,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="hw5_files/figure-html/model1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Figure 6. Visual assumption check for Model 1.</strong></p>
+<p><strong>Figure 6. Visual assumption check for Model 1.</strong> This model shows normal residuals and homoscedasticity.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -337,7 +339,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="hw5_files/figure-html/model2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Figure 6. Visual assumption check for Model 2.</strong></p>
+<p><strong>Figure 6. Visual assumption check for Model 2.</strong> This model shows normal residuals and homoscedasticity.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -368,7 +370,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="hw5_files/figure-html/model3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Figure 6. Visual assumption check for Model 3.</strong></p>
+<p><strong>Figure 6. Visual assumption check for Model 3.</strong> This model shows normal residuals and homoscedasticity.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -403,7 +405,7 @@ num_lvs      2.813855  1        1.677455
 num_phylls   2.995510  1        1.730754</code></pre>
 </div>
 </div>
-<p><strong>Table 1. Variance Inflation Factor (VIF).</strong></p>
+<p><strong>Table 1. Variance Inflation Factor (VIF).</strong> This table shows that there are no related predictors which inflate the data.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -432,6 +434,9 @@ Models ranked by AICc(x) </code></pre>
 </section>
 <section id="results" class="level1">
 <h1>Results</h1>
+<p>We found that the Model 3 including the predictors species, specific leaf area, feed level, chlorophyll, and number of pitchers and phyllodes best predicted biomass. According to the AIC (Table 2), Model 3 the simplest model we created that explains the most variance. Model 1 with only species excludes other predictors which also have a strong correlation with biomass. Model 2 which removes only the number of phyllodes still leaves variables with weak correlation which negatively effect the accuracy of the overall model. All included variables in Model 3 show some level of correlation with biomass (Table 3). Biologically,</p>
+<p>We log transformed our response variable to meet assumptions, but we back transformed our results when creating our model prediction for ease of communication.</p>
+<p>A description of the best model and how you chose it, with a summary of model results (parenthetical and/or table, 1-3 sentences) b. Interpretation of your chosen model (1-3 sentences) c.&nbsp;Visualization of model predictions for biomass as a function of the predictor variable of your choice with an accompanying caption (caption: 1-3 sentences) d.&nbsp;Discussion of results: what does this model mean biologically? (1-3 sentences)</p>
 <p>Model 1 showing species alone can be a good predictor but is not the best because it excludes Conversely, Model 2 includes predictor variables with little correlation to the response which negatively effects the accuracy of the overall model. Model 3 is the best model because it is the simplest as determined by AIC Akaike Info Criterion (AIC) from Table x values show that Model 3 is the simplest model that explains the most variance. (species + sla + feedlevel + chlorophyll + num_lvs)</p>
 <p>number of pitchers and phylodes use MuMIn::dredge() best: chl, fdl, num_lvs, sla Species:</p>
 <p>We found the best predictor variable of total mass of a Sarracina plant to be the total number of pitchers and phyllodes it possesses. Biologically, this makes sense because the more pitchers and phyllodes would mean a larger plant, and therefore larger total biomass.</p>
@@ -440,79 +445,352 @@ Models ranked by AICc(x) </code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model3_log)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> <span class="fu">tidy</span>(model3_log, <span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#change the p-value numbers if they tiny (&gt;0.001)</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(estimate<span class="sc">:</span>statistic, <span class="sc">~</span> <span class="fu">round</span>(.x, <span class="at">digits =</span> <span class="dv">3</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p.value =</span> <span class="fu">case_when</span>(p.value <span class="sc">&lt;</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="st">"&lt; 0.001"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#make into flex table </span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flextable</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#fit it to viewer</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autofit</span>()</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = log(totmass) ~ species + sla + feedlevel + chlorophyll + 
-    num_lvs, data = plant_subset)
+<div class="cell-output-display">
 
-Residuals:
-     Min       1Q   Median       3Q      Max 
--0.89025 -0.19762  0.03105  0.23873  0.78907 
-
-Coefficients:
-                    Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)        -1.391293   0.585389  -2.377 0.019611 *  
-speciesalata        1.137098   0.179533   6.334 9.53e-09 ***
-speciesflava        1.303336   0.196108   6.646 2.34e-09 ***
-speciesjonesii      0.318323   0.195368   1.629 0.106773    
-speciesleucophylla  1.696525   0.212727   7.975 4.89e-12 ***
-speciesminor        0.397390   0.185607   2.141 0.035005 *  
-speciespsittacina  -1.613985   0.200970  -8.031 3.75e-12 ***
-speciespurpurea    -0.434552   0.243679  -1.783 0.077947 .  
-speciesrosea       -0.866787   0.213093  -4.068 0.000102 ***
-speciesrubra        0.928795   0.177515   5.232 1.10e-06 ***
-sla                -0.002127   0.001063  -2.001 0.048421 *  
-feedlevel          -0.430123   0.228916  -1.879 0.063523 .  
-chlorophyll         0.004603   0.001154   3.989 0.000136 ***
-num_lvs             0.083852   0.020350   4.120 8.46e-05 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.4109 on 89 degrees of freedom
-Multiple R-squared:  0.8671,    Adjusted R-squared:  0.8477 
-F-statistic: 44.66 on 13 and 89 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="tabwid"><style>.cl-e25d458a{}.cl-e253f228{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-e2579af4{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-e2579afe{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-e257b3ea{width:1.568in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b3f4{width:0.863in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b3fe{width:0.854in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b3ff{width:0.795in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b400{width:0.799in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b408{width:1.228in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b409{width:1.398in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b412{width:1.568in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b413{width:0.863in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b414{width:0.854in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b41c{width:0.795in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b41d{width:0.799in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b41e{width:1.228in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b426{width:1.398in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b427{width:1.568in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b430{width:0.863in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b43a{width:0.854in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b43b{width:0.795in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b43c{width:0.799in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b444{width:1.228in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b445{width:1.398in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b44e{width:1.568in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b44f{width:0.863in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b450{width:0.854in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b458{width:0.795in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b459{width:0.799in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b45a{width:1.228in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b462{width:1.398in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b463{width:1.568in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b464{width:0.863in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b46c{width:0.854in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b46d{width:0.795in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b476{width:0.799in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b477{width:1.228in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b480{width:1.398in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b481{width:1.568in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b482{width:0.863in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b48a{width:0.854in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b48b{width:0.795in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b494{width:0.799in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b495{width:1.228in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b49e{width:1.398in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b49f{width:1.568in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4a8{width:0.863in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4a9{width:0.854in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4aa{width:0.795in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4b2{width:0.799in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4b3{width:1.228in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4bc{width:1.398in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4bd{width:1.568in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4be{width:0.863in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4c6{width:0.854in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4c7{width:0.795in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4d0{width:0.799in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4d1{width:1.228in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4da{width:1.398in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4db{width:1.568in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4dc{width:0.863in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4e4{width:0.854in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4e5{width:0.795in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4ee{width:0.799in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4ef{width:1.228in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e257b4f8{width:1.398in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-e25d458a"><thead><tr style="overflow-wrap:break-word;"><th class="cl-e257b3ea"><p class="cl-e2579af4"><span class="cl-e253f228">term</span></p></th><th class="cl-e257b3f4"><p class="cl-e2579afe"><span class="cl-e253f228">estimate</span></p></th><th class="cl-e257b3fe"><p class="cl-e2579afe"><span class="cl-e253f228">std.error</span></p></th><th class="cl-e257b3ff"><p class="cl-e2579afe"><span class="cl-e253f228">statistic</span></p></th><th class="cl-e257b400"><p class="cl-e2579af4"><span class="cl-e253f228">p.value</span></p></th><th class="cl-e257b408"><p class="cl-e2579afe"><span class="cl-e253f228">conf.low</span></p></th><th class="cl-e257b409"><p class="cl-e2579afe"><span class="cl-e253f228">conf.high</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-e257b412"><p class="cl-e2579af4"><span class="cl-e253f228">(Intercept)</span></p></td><td class="cl-e257b413"><p class="cl-e2579afe"><span class="cl-e253f228">-1.391</span></p></td><td class="cl-e257b414"><p class="cl-e2579afe"><span class="cl-e253f228">0.585</span></p></td><td class="cl-e257b41c"><p class="cl-e2579afe"><span class="cl-e253f228">-2.377</span></p></td><td class="cl-e257b41d"><p class="cl-e2579af4"><span class="cl-e253f228"></span></p></td><td class="cl-e257b41e"><p class="cl-e2579afe"><span class="cl-e253f228">-2.554448000</span></p></td><td class="cl-e257b426"><p class="cl-e2579afe"><span class="cl-e253f228">-0.22813789208</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e257b427"><p class="cl-e2579af4"><span class="cl-e253f228">speciesalata</span></p></td><td class="cl-e257b430"><p class="cl-e2579afe"><span class="cl-e253f228">1.137</span></p></td><td class="cl-e257b43a"><p class="cl-e2579afe"><span class="cl-e253f228">0.180</span></p></td><td class="cl-e257b43b"><p class="cl-e2579afe"><span class="cl-e253f228">6.334</span></p></td><td class="cl-e257b43c"><p class="cl-e2579af4"><span class="cl-e253f228">&lt; 0.001</span></p></td><td class="cl-e257b444"><p class="cl-e2579afe"><span class="cl-e253f228">0.780369221</span></p></td><td class="cl-e257b445"><p class="cl-e2579afe"><span class="cl-e253f228">1.49382737180</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e257b44e"><p class="cl-e2579af4"><span class="cl-e253f228">speciesflava</span></p></td><td class="cl-e257b44f"><p class="cl-e2579afe"><span class="cl-e253f228">1.303</span></p></td><td class="cl-e257b450"><p class="cl-e2579afe"><span class="cl-e253f228">0.196</span></p></td><td class="cl-e257b458"><p class="cl-e2579afe"><span class="cl-e253f228">6.646</span></p></td><td class="cl-e257b459"><p class="cl-e2579af4"><span class="cl-e253f228">&lt; 0.001</span></p></td><td class="cl-e257b45a"><p class="cl-e2579afe"><span class="cl-e253f228">0.913673261</span></p></td><td class="cl-e257b462"><p class="cl-e2579afe"><span class="cl-e253f228">1.69299867930</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e257b463"><p class="cl-e2579af4"><span class="cl-e253f228">speciesjonesii</span></p></td><td class="cl-e257b464"><p class="cl-e2579afe"><span class="cl-e253f228">0.318</span></p></td><td class="cl-e257b46c"><p class="cl-e2579afe"><span class="cl-e253f228">0.195</span></p></td><td class="cl-e257b46d"><p class="cl-e2579afe"><span class="cl-e253f228">1.629</span></p></td><td class="cl-e257b476"><p class="cl-e2579af4"><span class="cl-e253f228"></span></p></td><td class="cl-e257b477"><p class="cl-e2579afe"><span class="cl-e253f228">-0.069868584</span></p></td><td class="cl-e257b480"><p class="cl-e2579afe"><span class="cl-e253f228">0.70651525073</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e257b481"><p class="cl-e2579af4"><span class="cl-e253f228">speciesleucophylla</span></p></td><td class="cl-e257b482"><p class="cl-e2579afe"><span class="cl-e253f228">1.697</span></p></td><td class="cl-e257b48a"><p class="cl-e2579afe"><span class="cl-e253f228">0.213</span></p></td><td class="cl-e257b48b"><p class="cl-e2579afe"><span class="cl-e253f228">7.975</span></p></td><td class="cl-e257b494"><p class="cl-e2579af4"><span class="cl-e253f228">&lt; 0.001</span></p></td><td class="cl-e257b495"><p class="cl-e2579afe"><span class="cl-e253f228">1.273842173</span></p></td><td class="cl-e257b49e"><p class="cl-e2579afe"><span class="cl-e253f228">2.11920854116</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e257b427"><p class="cl-e2579af4"><span class="cl-e253f228">speciesminor</span></p></td><td class="cl-e257b430"><p class="cl-e2579afe"><span class="cl-e253f228">0.397</span></p></td><td class="cl-e257b43a"><p class="cl-e2579afe"><span class="cl-e253f228">0.186</span></p></td><td class="cl-e257b43b"><p class="cl-e2579afe"><span class="cl-e253f228">2.141</span></p></td><td class="cl-e257b43c"><p class="cl-e2579af4"><span class="cl-e253f228"></span></p></td><td class="cl-e257b444"><p class="cl-e2579afe"><span class="cl-e253f228">0.028593133</span></p></td><td class="cl-e257b445"><p class="cl-e2579afe"><span class="cl-e253f228">0.76618716655</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e257b427"><p class="cl-e2579af4"><span class="cl-e253f228">speciespsittacina</span></p></td><td class="cl-e257b430"><p class="cl-e2579afe"><span class="cl-e253f228">-1.614</span></p></td><td class="cl-e257b43a"><p class="cl-e2579afe"><span class="cl-e253f228">0.201</span></p></td><td class="cl-e257b43b"><p class="cl-e2579afe"><span class="cl-e253f228">-8.031</span></p></td><td class="cl-e257b43c"><p class="cl-e2579af4"><span class="cl-e253f228">&lt; 0.001</span></p></td><td class="cl-e257b444"><p class="cl-e2579afe"><span class="cl-e253f228">-2.013308620</span></p></td><td class="cl-e257b445"><p class="cl-e2579afe"><span class="cl-e253f228">-1.21466094313</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e257b427"><p class="cl-e2579af4"><span class="cl-e253f228">speciespurpurea</span></p></td><td class="cl-e257b430"><p class="cl-e2579afe"><span class="cl-e253f228">-0.435</span></p></td><td class="cl-e257b43a"><p class="cl-e2579afe"><span class="cl-e253f228">0.244</span></p></td><td class="cl-e257b43b"><p class="cl-e2579afe"><span class="cl-e253f228">-1.783</span></p></td><td class="cl-e257b43c"><p class="cl-e2579af4"><span class="cl-e253f228"></span></p></td><td class="cl-e257b444"><p class="cl-e2579afe"><span class="cl-e253f228">-0.918735914</span></p></td><td class="cl-e257b445"><p class="cl-e2579afe"><span class="cl-e253f228">0.04963226542</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e257b427"><p class="cl-e2579af4"><span class="cl-e253f228">speciesrosea</span></p></td><td class="cl-e257b430"><p class="cl-e2579afe"><span class="cl-e253f228">-0.867</span></p></td><td class="cl-e257b43a"><p class="cl-e2579afe"><span class="cl-e253f228">0.213</span></p></td><td class="cl-e257b43b"><p class="cl-e2579afe"><span class="cl-e253f228">-4.068</span></p></td><td class="cl-e257b43c"><p class="cl-e2579af4"><span class="cl-e253f228">&lt; 0.001</span></p></td><td class="cl-e257b444"><p class="cl-e2579afe"><span class="cl-e253f228">-1.290198099</span></p></td><td class="cl-e257b445"><p class="cl-e2579afe"><span class="cl-e253f228">-0.44337654267</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e257b463"><p class="cl-e2579af4"><span class="cl-e253f228">speciesrubra</span></p></td><td class="cl-e257b464"><p class="cl-e2579afe"><span class="cl-e253f228">0.929</span></p></td><td class="cl-e257b46c"><p class="cl-e2579afe"><span class="cl-e253f228">0.178</span></p></td><td class="cl-e257b46d"><p class="cl-e2579afe"><span class="cl-e253f228">5.232</span></p></td><td class="cl-e257b476"><p class="cl-e2579af4"><span class="cl-e253f228">&lt; 0.001</span></p></td><td class="cl-e257b477"><p class="cl-e2579afe"><span class="cl-e253f228">0.576076787</span></p></td><td class="cl-e257b480"><p class="cl-e2579afe"><span class="cl-e253f228">1.28151320862</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e257b49f"><p class="cl-e2579af4"><span class="cl-e253f228">sla</span></p></td><td class="cl-e257b4a8"><p class="cl-e2579afe"><span class="cl-e253f228">-0.002</span></p></td><td class="cl-e257b4a9"><p class="cl-e2579afe"><span class="cl-e253f228">0.001</span></p></td><td class="cl-e257b4aa"><p class="cl-e2579afe"><span class="cl-e253f228">-2.001</span></p></td><td class="cl-e257b4b2"><p class="cl-e2579af4"><span class="cl-e253f228"></span></p></td><td class="cl-e257b4b3"><p class="cl-e2579afe"><span class="cl-e253f228">-0.004238361</span></p></td><td class="cl-e257b4bc"><p class="cl-e2579afe"><span class="cl-e253f228">-0.00001507797</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e257b4bd"><p class="cl-e2579af4"><span class="cl-e253f228">feedlevel</span></p></td><td class="cl-e257b4be"><p class="cl-e2579afe"><span class="cl-e253f228">-0.430</span></p></td><td class="cl-e257b4c6"><p class="cl-e2579afe"><span class="cl-e253f228">0.229</span></p></td><td class="cl-e257b4c7"><p class="cl-e2579afe"><span class="cl-e253f228">-1.879</span></p></td><td class="cl-e257b4d0"><p class="cl-e2579af4"><span class="cl-e253f228"></span></p></td><td class="cl-e257b4d1"><p class="cl-e2579afe"><span class="cl-e253f228">-0.884973580</span></p></td><td class="cl-e257b4da"><p class="cl-e2579afe"><span class="cl-e253f228">0.02472709246</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e257b481"><p class="cl-e2579af4"><span class="cl-e253f228">chlorophyll</span></p></td><td class="cl-e257b482"><p class="cl-e2579afe"><span class="cl-e253f228">0.005</span></p></td><td class="cl-e257b48a"><p class="cl-e2579afe"><span class="cl-e253f228">0.001</span></p></td><td class="cl-e257b48b"><p class="cl-e2579afe"><span class="cl-e253f228">3.989</span></p></td><td class="cl-e257b494"><p class="cl-e2579af4"><span class="cl-e253f228">&lt; 0.001</span></p></td><td class="cl-e257b495"><p class="cl-e2579afe"><span class="cl-e253f228">0.002310462</span></p></td><td class="cl-e257b49e"><p class="cl-e2579afe"><span class="cl-e253f228">0.00689624057</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e257b4db"><p class="cl-e2579af4"><span class="cl-e253f228">num_lvs</span></p></td><td class="cl-e257b4dc"><p class="cl-e2579afe"><span class="cl-e253f228">0.084</span></p></td><td class="cl-e257b4e4"><p class="cl-e2579afe"><span class="cl-e253f228">0.020</span></p></td><td class="cl-e257b4e5"><p class="cl-e2579afe"><span class="cl-e253f228">4.120</span></p></td><td class="cl-e257b4ee"><p class="cl-e2579af4"><span class="cl-e253f228">&lt; 0.001</span></p></td><td class="cl-e257b4ef"><p class="cl-e2579afe"><span class="cl-e253f228">0.043416839</span></p></td><td class="cl-e257b4f8"><p class="cl-e2579afe"><span class="cl-e253f228">0.12428792720</span></p></td></tr></tbody></table></div>
 </div>
 </div>
+<p><strong>Table 3. Summary of Model 3.</strong></p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>model_pred <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(model3_log, <span class="at">terms =</span> <span class="st">"num_lvs"</span>, <span class="at">back.transform =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>model_pred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model three predictions</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>model3_pred <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(model3_log, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"sla"</span>, <span class="st">"feedlevel"</span>, <span class="st">"chlorophyll"</span>, <span class="st">"num_lvs"</span>, <span class="st">"species"</span>), <span class="at">back.transform =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>model3_pred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># Predicted values of totmass
 
-num_lvs | Predicted |         95% CI
-------------------------------------
-      2 |      5.64 | [ 4.14,  7.70]
-      4 |      6.68 | [ 5.10,  8.73]
-      5 |      7.26 | [ 5.63,  9.36]
-      7 |      8.59 | [ 6.72, 10.96]
-      9 |     10.15 | [ 7.82, 13.17]
-     10 |     11.04 | [ 8.37, 14.57]
-     12 |     13.06 | [ 9.45, 18.04]
-     17 |     19.86 | [12.28, 32.12]
+#   feedlevel = -0.04
+# chlorophyll = 423.28
+#     num_lvs = 10.1
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |     11.86 | [8.48, 16.60]
+120 |     10.01 | [7.40, 13.54]
+220 |      8.09 | [5.53, 11.83]
+380 |      5.76 | [3.02, 10.96]
+
+#   feedlevel = 0.18
+# chlorophyll = 423.28
+#     num_lvs = 10.1
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |     10.79 | [7.86, 14.82]
+120 |      9.10 | [6.86, 12.07]
+220 |      7.36 | [5.10, 10.61]
+380 |      5.24 | [2.77,  9.90]
+
+#   feedlevel = 0.4
+# chlorophyll = 423.28
+#     num_lvs = 10.1
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |      9.82 | [7.07, 13.64]
+120 |      8.28 | [6.15, 11.15]
+220 |      6.69 | [4.58,  9.78]
+380 |      4.76 | [2.50,  9.09]
+
+#   feedlevel = -0.04
+# chlorophyll = 471.29
+#     num_lvs = 10.1
+
+sla | Predicted |         95% CI
+--------------------------------
+ 40 |     14.80 | [10.66, 20.53]
+120 |     12.48 | [ 9.23, 16.88]
+220 |     10.09 | [ 6.84, 14.89]
+380 |      7.18 | [ 3.72, 13.87]
+
+#   feedlevel = 0.18
+# chlorophyll = 471.29
+#     num_lvs = 10.1
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |     13.46 | [9.95, 18.20]
+120 |     11.35 | [8.62, 14.96]
+220 |      9.18 | [6.34, 13.30]
+380 |      6.53 | [3.41, 12.50]
+
+#   feedlevel = 0.4
+# chlorophyll = 471.29
+#     num_lvs = 10.1
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |     12.24 | [9.00, 16.67]
+120 |     10.33 | [7.77, 13.73]
+220 |      8.35 | [5.72, 12.19]
+380 |      5.94 | [3.09, 11.44]
+
+#   feedlevel = -0.04
+# chlorophyll = 519.29
+#     num_lvs = 10.1
+
+sla | Predicted |         95% CI
+--------------------------------
+ 40 |     18.45 | [12.95, 26.31]
+120 |     15.57 | [11.08, 21.86]
+220 |     12.59 | [ 8.21, 19.30]
+380 |      8.96 | [ 4.49, 17.85]
+
+#   feedlevel = 0.18
+# chlorophyll = 519.29
+#     num_lvs = 10.1
+
+sla | Predicted |         95% CI
+--------------------------------
+ 40 |     16.79 | [12.13, 23.24]
+120 |     14.16 | [10.38, 19.32]
+220 |     11.45 | [ 7.63, 17.19]
+380 |      8.15 | [ 4.13, 16.05]
+
+#   feedlevel = 0.4
+# chlorophyll = 519.29
+#     num_lvs = 10.1
+
+sla | Predicted |         95% CI
+--------------------------------
+ 40 |     15.27 | [11.03, 21.15]
+120 |     12.88 | [ 9.43, 17.61]
+220 |     10.42 | [ 6.92, 15.68]
+380 |      7.41 | [ 3.75, 14.65]
+
+#   feedlevel = -0.04
+# chlorophyll = 423.28
+#     num_lvs = 4
+
+sla | Predicted |       95% CI
+------------------------------
+ 40 |      7.11 | [5.12, 9.88]
+120 |      6.00 | [4.49, 8.01]
+220 |      4.85 | [3.37, 6.98]
+380 |      3.45 | [1.84, 6.48]
+
+#   feedlevel = 0.18
+# chlorophyll = 423.28
+#     num_lvs = 4
+
+sla | Predicted |       95% CI
+------------------------------
+ 40 |      6.47 | [4.72, 8.86]
+120 |      5.46 | [4.15, 7.18]
+220 |      4.41 | [3.09, 6.29]
+380 |      3.14 | [1.68, 5.87]
+
+#   feedlevel = 0.4
+# chlorophyll = 423.28
+#     num_lvs = 4
+
+sla | Predicted |       95% CI
+------------------------------
+ 40 |      5.89 | [4.22, 8.20]
+120 |      4.97 | [3.70, 6.67]
+220 |      4.01 | [2.76, 5.83]
+380 |      2.86 | [1.51, 5.41]
+
+#   feedlevel = -0.04
+# chlorophyll = 471.29
+#     num_lvs = 4
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |      8.87 | [6.46, 12.19]
+120 |      7.48 | [5.62,  9.97]
+220 |      6.05 | [4.17,  8.78]
+380 |      4.31 | [2.26,  8.20]
+
+#   feedlevel = 0.18
+# chlorophyll = 471.29
+#     num_lvs = 4
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |      8.07 | [6.00, 10.86]
+120 |      6.81 | [5.22,  8.88]
+220 |      5.50 | [3.85,  7.87]
+380 |      3.92 | [2.07,  7.41]
+
+#   feedlevel = 0.4
+# chlorophyll = 471.29
+#     num_lvs = 4
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |      7.34 | [5.39, 10.00]
+120 |      6.19 | [4.68,  8.20]
+220 |      5.01 | [3.46,  7.25]
+380 |      3.56 | [1.87,  6.80]
+
+#   feedlevel = -0.04
+# chlorophyll = 519.29
+#     num_lvs = 4
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |     11.07 | [7.85, 15.61]
+120 |      9.33 | [6.75, 12.91]
+220 |      7.55 | [5.00, 11.38]
+380 |      5.37 | [2.73, 10.55]
+
+#   feedlevel = 0.18
+# chlorophyll = 519.29
+#     num_lvs = 4
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |     10.07 | [7.32, 13.85]
+120 |      8.49 | [6.29, 11.45]
+220 |      6.86 | [4.63, 10.17]
+380 |      4.88 | [2.51,  9.51]
+
+#   feedlevel = 0.4
+# chlorophyll = 519.29
+#     num_lvs = 4
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |      9.16 | [6.62, 12.67]
+120 |      7.72 | [5.68, 10.50]
+220 |      6.24 | [4.18,  9.32]
+380 |      4.44 | [2.27,  8.70]
+
+#   feedlevel = -0.04
+# chlorophyll = 423.28
+#     num_lvs = 7.1
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |      9.22 | [6.77, 12.56]
+120 |      7.78 | [5.95, 10.18]
+220 |      6.29 | [4.43,  8.94]
+380 |      4.48 | [2.39,  8.37]
+
+#   feedlevel = 0.18
+# chlorophyll = 423.28
+#     num_lvs = 7.1
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |      8.39 | [6.27, 11.22]
+120 |      7.08 | [5.51,  9.09]
+220 |      5.72 | [4.08,  8.03]
+380 |      4.07 | [2.19,  7.57]
+
+#   feedlevel = 0.4
+# chlorophyll = 423.28
+#     num_lvs = 7.1
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |      7.63 | [5.62, 10.37]
+120 |      6.44 | [4.92,  8.43]
+220 |      5.21 | [3.65,  7.43]
+380 |      3.70 | [1.97,  6.96]
+
+#   feedlevel = -0.04
+# chlorophyll = 471.29
+#     num_lvs = 7.1
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |     11.51 | [8.54, 15.50]
+120 |      9.71 | [7.43, 12.68]
+220 |      7.85 | [5.47, 11.25]
+380 |      5.58 | [2.95, 10.58]
+
+#   feedlevel = 0.18
+# chlorophyll = 471.29
+#     num_lvs = 7.1
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |     10.47 | [7.97, 13.75]
+120 |      8.83 | [6.94, 11.23]
+220 |      7.14 | [5.07, 10.06]
+380 |      5.08 | [2.70,  9.55]
+
+#   feedlevel = 0.4
+# chlorophyll = 471.29
+#     num_lvs = 7.1
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |      9.52 | [7.17, 12.64]
+120 |      8.03 | [6.23, 10.35]
+220 |      6.49 | [4.56,  9.25]
+380 |      4.62 | [2.44,  8.75]
+
+#   feedlevel = -0.04
+# chlorophyll = 519.29
+#     num_lvs = 7.1
+
+sla | Predicted |         95% CI
+--------------------------------
+ 40 |     14.35 | [10.35, 19.90]
+120 |     12.11 | [ 8.89, 16.48]
+220 |      9.79 | [ 6.55, 14.61]
+380 |      6.96 | [ 3.56, 13.63]
+
+#   feedlevel = 0.18
+# chlorophyll = 519.29
+#     num_lvs = 7.1
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |     13.05 | [9.69, 17.58]
+120 |     11.01 | [8.33, 14.56]
+220 |      8.90 | [6.09, 13.02]
+380 |      6.33 | [3.27, 12.27]
+
+#   feedlevel = 0.4
+# chlorophyll = 519.29
+#     num_lvs = 7.1
+
+sla | Predicted |        95% CI
+-------------------------------
+ 40 |     11.88 | [8.79, 16.05]
+120 |     10.02 | [7.54, 13.31]
+220 |      8.10 | [5.51, 11.91]
+380 |      5.76 | [2.96, 11.21]
 
 Adjusted for:
-*     species =  alata
-*         sla = 129.27
-*   feedlevel =   0.18
-* chlorophyll = 471.29</code></pre>
+* species = alata</code></pre>
 </div>
 </div>
+<p><strong>Table 4. Back transformed predictions for Model 3.</strong></p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggpredict</span>(model3_log, <span class="at">terms =</span> <span class="st">"num_lvs"</span>, <span class="at">back.transform =</span> <span class="cn">TRUE</span>), <span class="at">add.data =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model 3 predictions plot</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggpredict</span>(model3_log, <span class="at">terms =</span> <span class="st">"num_lvs"</span>, <span class="at">back.transform =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">add.data =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Predicted values of total mass"</span>,</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total mass (g)"</span>,</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Number of pitchers and phyllodes"</span>) <span class="sc">+</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="hw5_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p><strong>Figure 7. Predicted values of total mass as a function of number of pitchers and phyllodes.</strong></p>
 </section>
 </section>
 <section id="bibliography" class="level1">
