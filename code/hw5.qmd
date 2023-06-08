@@ -65,7 +65,13 @@ k.  Model comparison using the null model, full model, and additional models fro
 
 ### Methods Figures & Code
 
-Figure 1:
+
+```{r}
+# Figure 1: visualize missing data
+gg_miss_var(plant) + labs(caption = "Figure 1.")
+
+```
+**Figure 1: Visualizing variables with missing data in the Sarracinia data subset.** The variables chlorophyll, amass, sla, num_phylls, and num_lvs all have missing data, however, the missingness is relatively low.
 
 ```{r methods-code}
 # Figure 1: visualize missing data
