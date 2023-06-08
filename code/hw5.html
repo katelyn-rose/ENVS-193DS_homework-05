@@ -88,9 +88,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
   <ul class="collapse">
-  <li><a href="#methods-code" id="toc-methods-code" class="nav-link" data-scroll-target="#methods-code">Methods Code</a></li>
+  <li><a href="#methods-figures-code" id="toc-methods-figures-code" class="nav-link" data-scroll-target="#methods-figures-code">Methods Figures &amp; Code</a></li>
   </ul></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
+  <ul class="collapse">
+  <li><a href="#results-code" id="toc-results-code" class="nav-link" data-scroll-target="#results-code">Results Code</a></li>
+  </ul></li>
   <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography">Bibliography</a></li>
   </ul>
 </nav>
@@ -159,29 +162,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="methods" class="level1">
 <h1>Methods</h1>
-<p>Species</p>
-<ol type="a">
-<li><p>Sampling methods (these should be summarized from the metadata and cited)</p></li>
-<li><p>Description of data organization and processing (1-3 sentences)</p></li>
-<li><p>We began by creating a visualization of the missing data in our entire dataset (Figure 1). Visualization of missing observations with an accompanying caption and discussion (caption: 1-3 sentences, discussion: 1-3 sentences)</p></li>
-<li><p>In order to examine the relationships between the numerical variables in our dataset, we calculated Pearson’s r and visually represented the correlation using a correlation plot (Figure 2). “Visualization of Pearson’s correlation between variables with an accompanying caption and discussion (caption: 1-3 sentences, discussion: 1-3 sentences)</p></li>
-<li><p>(Figure 3) Visualization of relationships between variables (not correlation) with an accompanying caption and discussion (caption: 1-3 sentences, discussion: 1-3 sentences)</p></li>
-<li><p>To determine how species and physiological characters predict biomass, we fit multiple linear models. We started by creating a full model using the entire subset of variables of interest, with total mass (<span class="math inline">\(g\)</span>) as the response variable, and the predictor variables being the species of Sarracenia, feed level (<span class="math inline">\(g\)</span>), specific leaf area (<span class="math inline">\(cm^2/g\)</span>), chlorophyll a + b content (<span class="math inline">\(mg/g\)</span>), photosynthetic rate (<span class="math inline">\(nmol CO2 * g^-1 * s^-1\)</span>), number of phyllodes, and number of pitchers and phyllodes. The null model does not contain our predictor variables, only the response variable. We tested our full model for normality using Shapiro-Wilk test and for heteroskedasticity using Breusch-Pagan test. Unfortunately, the full model was non-normal &amp; heteroscedastic, therefore did not meet the assumptions for linear regression. To combat this, we performed a mathematical transformation by taking the log of the response variable. Creating the null and full model with accompanying discussion (1-3 sentences)</p></li>
-<li><p>Visual and statistical assumption checks for the full model with accompanying discussion (1-3 sentences)</p></li>
-<li><p>Log transform Explanation of any transformation and justification (1-3 sentences)</p></li>
-<li><p>Using this log model, we set out to determine which set of predictor variables best explains the response in total mass. We found that species alone is a good predictor of total mass. Figure 4: model 1, species (not enough)</p></li>
-</ol>
+<p>llison and Farnsworth (2021) conducted a manipulative feeding experiment with multiple species of Sarracenia to examine the effects of varying nutrient availability on multiple physiological factors. The resulting data was wrangled and uploaded to RStudio. We initially filtered the dataset to extract the variables most relevant to answering our research question: how do Sarracenia characteristics predict biomass? After initial wrangling and filtering, we began our analysis by creating a visualization of the missing data in our entire data subset (Figure 1). This figure brings attention to the missing values for several variables, however, the missingness is relatively low. In order to examine the relationships between the numerical variables in our dataset, we calculated Pearson’s r and visually represented the correlation using a correlation plot (Figure 2). This correlation plot allows us to visually represent the possible correlations between our variables. To further understand the relationships between our variables, we created a pair plot of each variable compared against the others (Figure 3). o determine how species and physiological characters predict biomass, we fit multiple linear models. We started by creating a full model using the entire subset of variables of interest, with total mass (<span class="math inline">\(g\)</span>) as the response variable, and the predictor variables being the species of Sarracenia, feed level (<span class="math inline">\(g\)</span>), specific leaf area (<span class="math inline">\(cm^2/g\)</span>), chlorophyll a + b content (<span class="math inline">\(mg/g\)</span>), photosynthetic rate (<span class="math inline">\(nmol CO2 * g^-1 * s^-1\)</span>), number of phyllodes, and number of pitchers and phyllodes. The null model does not contain our predictor variables, only the response variable. We tested our full model for normality using Shapiro-Wilk test and for heteroscedasticity using Breusch-Pagan test. Unfortunately, the full model was non-normal &amp; heteroscedastic, therefore did not meet the assumptions for linear regression. To combat this, we performed a mathematical transformation by taking the log of the response variable. The resulting log transformed model did meet the visual and statistical assumption checks for linear regression by having normally distributed residuals and homoscedastic variance. Using this log model, we set out to determine which predictor variables best explain the response in total mass. e found that species alone is a good predictor of total mass. Figure 4: model 1, species (not enough)</p>
 <p>Assumption</p>
 <p>Figure 5: model 2,</p>
-<p>Assumptions</p>
+<p>To create the second model, we removed the predictor variable with the lowest correlation with biomass, which was the photosynthetic rate. Looking at a model with relatively many predictor variables Assumptions</p>
 <p>Figure 6: model 3, goldilocks</p>
 <p>Model construction with visual and statistical assumption checks for three additional models with justification (i.e.&nbsp;why did you choose those predictor variables?) (justification: 1-3 sentences per model)</p>
 <ol start="10" type="a">
 <li><p>We evaluated multicolinearity by calculating generalized variance inflation factor and determined that there are no related predictors which inflate the data. Variance inflation factor check for the full model with accompanying discussion (discussion: 1-3 sentences)</p></li>
 <li><p>Model comparison using the null model, full model, and additional models from part 7g</p></li>
 </ol>
-<section id="methods-code" class="level3">
-<h3 class="anchored" data-anchor-id="methods-code">Methods Code</h3>
+<section id="methods-figures-code" class="level3">
+<h3 class="anchored" data-anchor-id="methods-figures-code">Methods Figures &amp; Code</h3>
 <p>Figure 1:</p>
 <div class="cell">
 <details>
@@ -322,7 +314,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># species predicts biomass?</span></span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>model3_log <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(totmass) <span class="sc">~</span> species <span class="sc">+</span> sla <span class="sc">+</span> feedlevel <span class="sc">+</span> chlorophyll <span class="sc">+</span> num_lvs, <span class="at">data =</span> plant_subset)</span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model3_log)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model3_log)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="hw5_files/figure-html/methods-code-7.png" class="img-fluid" width="672"></p>
@@ -359,16 +352,96 @@ num_phylls   2.995510  1        1.730754</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Akaike Info Criterion (AIC)</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># MuMIn::model.sel(full_log, null_log, model1_log, model2_log, model3_log)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Akaike Information Criterion (AIC)</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#MuMIn::model.sel(full_log, null_log, model1_log, model2_log, model3_log)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
 </section>
 <section id="results" class="level1">
 <h1>Results</h1>
-<p>species alone can be a good predictor but is not the best because it excludes (species + sla + feedlevel + chlorophyll + num_lvs)</p>
+<p>Model 1 showing species alone can be a good predictor but is not the best because it excludes Conversely, Model 2 includes predictor variables with little correlation to the response which negatively effects the accuracy of the overall model. Model 3 is the best model because it is the simplest as determined by AIC Akaike Info Criterion (AIC) from Table x values show that Model 3 is the simplest model that explains the most variance. (species + sla + feedlevel + chlorophyll + num_lvs)</p>
 <p>number of pitchers and phylodes use MuMIn::dredge() best: chl, fdl, num_lvs, sla Species:</p>
+<p>We found the best predictor variable of total mass of a Sarracina plant to be the total number of pitchers and phyllodes it possesses. Biologically, this makes sense because the more pitchers and phyllodes would mean a larger plant, and therefore larger total biomass.</p>
+<section id="results-code" class="level3">
+<h3 class="anchored" data-anchor-id="results-code">Results Code</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model3_log)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(totmass) ~ species + sla + feedlevel + chlorophyll + 
+    num_lvs, data = plant_subset)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.89025 -0.19762  0.03105  0.23873  0.78907 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        -1.391293   0.585389  -2.377 0.019611 *  
+speciesalata        1.137098   0.179533   6.334 9.53e-09 ***
+speciesflava        1.303336   0.196108   6.646 2.34e-09 ***
+speciesjonesii      0.318323   0.195368   1.629 0.106773    
+speciesleucophylla  1.696525   0.212727   7.975 4.89e-12 ***
+speciesminor        0.397390   0.185607   2.141 0.035005 *  
+speciespsittacina  -1.613985   0.200970  -8.031 3.75e-12 ***
+speciespurpurea    -0.434552   0.243679  -1.783 0.077947 .  
+speciesrosea       -0.866787   0.213093  -4.068 0.000102 ***
+speciesrubra        0.928795   0.177515   5.232 1.10e-06 ***
+sla                -0.002127   0.001063  -2.001 0.048421 *  
+feedlevel          -0.430123   0.228916  -1.879 0.063523 .  
+chlorophyll         0.004603   0.001154   3.989 0.000136 ***
+num_lvs             0.083852   0.020350   4.120 8.46e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4109 on 89 degrees of freedom
+Multiple R-squared:  0.8671,    Adjusted R-squared:  0.8477 
+F-statistic: 44.66 on 13 and 89 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>model_pred <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(model3_log, <span class="at">terms =</span> <span class="st">"num_lvs"</span>, <span class="at">back.transform =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>model_pred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># Predicted values of totmass
+
+num_lvs | Predicted |         95% CI
+------------------------------------
+      2 |      5.64 | [ 4.14,  7.70]
+      4 |      6.68 | [ 5.10,  8.73]
+      5 |      7.26 | [ 5.63,  9.36]
+      7 |      8.59 | [ 6.72, 10.96]
+      9 |     10.15 | [ 7.82, 13.17]
+     10 |     11.04 | [ 8.37, 14.57]
+     12 |     13.06 | [ 9.45, 18.04]
+     17 |     19.86 | [12.28, 32.12]
+
+Adjusted for:
+*     species =  alata
+*         sla = 129.27
+*   feedlevel =   0.18
+* chlorophyll = 471.29</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggpredict</span>(model3_log, <span class="at">terms =</span> <span class="st">"num_lvs"</span>, <span class="at">back.transform =</span> <span class="cn">TRUE</span>), <span class="at">add.data =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="hw5_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
 </section>
 <section id="bibliography" class="level1">
 <h1>Bibliography</h1>

@@ -16,6 +16,7 @@ editor: visual
 # Introduction
 
 ### Introduction Code:
+
 ```{r packages}
 # loading in necessary packages
 library(tidyverse)
@@ -41,64 +42,31 @@ plant <- read_csv(here("data", "knb-lter-hfr.109.18","hf109-01-sarracenia.csv"))
   select(totmass, species, feedlevel, sla, chlorophyll, amass, num_lvs, num_phylls)
 ```
 
-
 # Methods
-Species
 
-a. Sampling methods (these should be summarized from the metadata and cited)
 
-b. Description of data organization and processing (1-3 sentences)
-
-c. We began by creating a visualization of the missing data in our entire dataset (Figure 1). 
-Visualization of missing observations with an accompanying caption and discussion
-(caption: 1-3 sentences, discussion: 1-3 sentences)
-
-d. In order to examine the relationships between the numerical variables in our dataset, we calculated Pearson's r and visually represented the correlation using a correlation plot (Figure 2). 
-"Visualization of Pearson’s correlation between variables with an accompanying
-caption and discussion (caption: 1-3 sentences, discussion: 1-3 sentences)
-
-e. (Figure 3) 
-Visualization of relationships between variables (not correlation) with an
-accompanying caption and discussion (caption: 1-3 sentences, discussion: 1-3
-sentences)
-
-f. To determine how species and physiological characters predict biomass, we fit multiple linear models. We started by creating a full model using the entire subset of variables of interest, with total mass ($g$) as the response variable, and the predictor variables being the species of Sarracenia, feed level ($g$), specific leaf area ($cm^2/g$), chlorophyll a + b content ($mg/g$), photosynthetic rate ($nmol CO2 * g^-1 * s^-1$), number of phyllodes, and number of pitchers and  phyllodes. The null model does not contain our predictor variables, only the response variable. We tested our full model for normality using Shapiro-Wilk test and for heteroskedasticity using Breusch-Pagan test. Unfortunately, the full model was non-normal & heteroscedastic, therefore did not meet the assumptions for linear regression. To combat this, we performed a mathematical transformation by taking the log of the response variable. 
-Creating the null and full model with accompanying discussion (1-3 sentences)
-
-g. Visual and statistical assumption checks for the full model with accompanying
-discussion (1-3 sentences)
-
-h. Log transform
-Explanation of any transformation and justification (1-3 sentences)
-
-i. Using this log model, we set out to determine which set of predictor variables best explains the response in total mass. We found that species alone is a good predictor of total mass. 
-Figure 4: model 1, species (not enough)
-
+\t Ellison and Farnsworth (2021) conducted a manipulative feeding experiment with multiple species of Sarracenia to examine the effects of varying nutrient availability on multiple physiological factors. The resulting data was wrangled and uploaded to RStudio. We initially filtered the dataset to extract the variables most relevant to answering our research question: how do Sarracenia characteristics predict biomass? After initial wrangling and filtering, we began our analysis by creating a visualization of the missing data in our entire data subset (Figure 1). This figure brings attention to the missing values for several variables, however, the missingness is relatively low. In order to examine the relationships between the numerical variables in our dataset, we calculated Pearson's r and visually represented the correlation using a correlation plot (Figure 2). This correlation plot allows us to visually represent the possible correlations between our variables. To further understand the relationships between our variables, we created a pair plot of each variable compared against the others (Figure 3). 
+\t To determine how species and physiological characters predict biomass, we fit multiple linear models. We started by creating a full model using the entire subset of variables of interest, with total mass ($g$) as the response variable, and the predictor variables being the species of Sarracenia, feed level ($g$), specific leaf area ($cm^2/g$), chlorophyll a + b content ($mg/g$), photosynthetic rate ($nmol CO2 * g^-1 * s^-1$), number of phyllodes, and number of pitchers and phyllodes. The null model does not contain our predictor variables, only the response variable. We tested our full model for normality using Shapiro-Wilk test and for heteroscedasticity using Breusch-Pagan test. Unfortunately, the full model was non-normal & heteroscedastic, therefore did not meet the assumptions for linear regression. To combat this, we performed a mathematical transformation by taking the log of the response variable. The resulting log transformed model did meet the visual and statistical assumption checks for linear regression by having normally distributed residuals and homoscedastic variance. Using this log model, we set out to determine which predictor variables best explain the response in total mass. 
+\t We found that species alone is a good predictor of total mass. Figure 4: model 1, species (not enough)
 
 Assumption
 
-Figure 5: model 2, 
+Figure 5: model 2,
 
-To create the second model, we removed the predictor variable with the lowest correlation with biomass, which was the photosynthetic rate.  Looking at a model with relatively many predictor variables 
-Assumptions
+To create the second model, we removed the predictor variable with the lowest correlation with biomass, which was the photosynthetic rate. Looking at a model with relatively many predictor variables Assumptions
 
 Figure 6: model 3, goldilocks
 
-Model construction with visual and statistical assumption checks for three
-additional models with justification (i.e. why did you choose those predictor
-variables?) (justification: 1-3 sentences per model)
+Model construction with visual and statistical assumption checks for three additional models with justification (i.e. why did you choose those predictor variables?) (justification: 1-3 sentences per model)
 
-j. We evaluated multicolinearity by calculating generalized variance inflation factor and determined that there are no related predictors which inflate the data.
-Variance inflation factor check for the full model with accompanying discussion
-(discussion: 1-3 sentences)
+j.  We evaluated multicolinearity by calculating generalized variance inflation factor and determined that there are no related predictors which inflate the data. Variance inflation factor check for the full model with accompanying discussion (discussion: 1-3 sentences)
 
-k. Model comparison using the null model, full model, and additional models from part
-7g
+k.  Model comparison using the null model, full model, and additional models from part 7g
 
-
-### Methods Code
+### Methods Figures & Code
 
 Figure 1:
+
 ```{r methods-code}
 # Figure 1: visualize missing data
 gg_miss_var(plant) + labs(caption = "Figure 1.")
@@ -175,6 +143,7 @@ check_heteroscedasticity(model1_log)
 # species predicts biomass?
 model3_log <- lm(log(totmass) ~ species + sla + feedlevel + chlorophyll + num_lvs, data = plant_subset)
 
+par(mfrow = c(2,2))
 plot(model3_log)
 
 # model stats assumptions check 
@@ -185,24 +154,20 @@ check_heteroscedasticity(model3_log)
 # Variance Inflation Factor (VIF) to evaluate multicolinearity
 car::vif(full_log, caption = "Table x.")
 
-# Akaike Info Criterion (AIC)
-# MuMIn::model.sel(full_log, null_log, model1_log, model2_log, model3_log)
+# Akaike Information Criterion (AIC)
+#MuMIn::model.sel(full_log, null_log, model1_log, model2_log, model3_log)
 ```
 
+# Results
 
-# Results 
-Model 1 showing species alone can be a good predictor
-but is not the best because it excludes 
-Conversely, Model 2 includes predictor variables with little correlation to the response which negatively effects the accuracy of the overall model.
-Model 3 is the best model because it is the simplest as determined by AIC 
-Akaike Info Criterion (AIC) from Table x values show that  Model 3 is the simplest model that explains the most variance.
-(species + sla + feedlevel + chlorophyll + num_lvs)
+Model 1 showing species alone can be a good predictor but is not the best because it excludes Conversely, Model 2 includes predictor variables with little correlation to the response which negatively effects the accuracy of the overall model. Model 3 is the best model because it is the simplest as determined by AIC Akaike Info Criterion (AIC) from Table x values show that Model 3 is the simplest model that explains the most variance. (species + sla + feedlevel + chlorophyll + num_lvs)
 
-number of pitchers and phylodes
-use MuMIn::dredge()      best: chl, fdl, num_lvs, sla
-Species:
+number of pitchers and phylodes use MuMIn::dredge() best: chl, fdl, num_lvs, sla Species:
+
+We found the best predictor variable of total mass of a Sarracina plant to be the total number of pitchers and phyllodes it possesses. Biologically, this makes sense because the more pitchers and phyllodes would mean a larger plant, and therefore larger total biomass.
 
 ### Results Code
+
 ```{r}
 summary(model3_log)
 ```
@@ -216,6 +181,5 @@ model_pred
 ```{r}
 plot(ggpredict(model3_log, terms = "num_lvs", back.transform = TRUE), add.data = TRUE)
 ```
-
 
 # Bibliography
