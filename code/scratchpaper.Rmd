@@ -111,7 +111,7 @@ mathematical transformation can make data betta
 null_log <- lm(log(totmass) ~ 1, data = plant_subset)
 full_log <- lm(log(totmass) ~ species + feedlevel + sla + chlorophyll + amass + num_lvs + num_phylls, data = plant_subset)
 
-
+par(mfrow = c(2,2))
 plot(full_log)
 ```
 
