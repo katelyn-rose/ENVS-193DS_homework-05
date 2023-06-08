@@ -46,7 +46,7 @@ plant <- read_csv(here("data", "knb-lter-hfr.109.18","hf109-01-sarracenia.csv"))
 
 
 \t Ellison and Farnsworth (2021) conducted a manipulative feeding experiment with multiple species of Sarracenia to examine the effects of varying nutrient availability on multiple physiological factors. The resulting data was wrangled and uploaded to RStudio. We initially filtered the dataset to extract the variables most relevant to answering our research question: how do Sarracenia characteristics predict biomass? After initial wrangling and filtering, we began our analysis by creating a visualization of the missing data in our entire data subset (Figure 1). This figure brings attention to the missing values for several variables, however, the missingness is relatively low. In order to examine the relationships between the numerical variables in our dataset, we calculated Pearson's r and visually represented the correlation using a correlation plot (Figure 2). This correlation plot allows us to visually represent the possible correlations between our variables. To further understand the relationships between our variables, we created a pair plot of each variable compared against the others (Figure 3). 
-\t To determine how species and physiological characters predict biomass, we fit multiple linear models. We started by creating a full model using the entire subset of variables of interest, with total mass ($g$) as the response variable, and the predictor variables being the species of Sarracenia, feed level ($g$), specific leaf area ($cm^2/g$), chlorophyll a + b content ($mg/g$), photosynthetic rate ($nmol CO2 * g^-1 * s^-1$), number of phyllodes, and number of pitchers and phyllodes. The null model does not contain our predictor variables, only the response variable. We tested our full model for normality using Shapiro-Wilk test and for heteroscedasticity using Breusch-Pagan test. Unfortunately, the full model was non-normal & heteroscedastic, therefore did not meet the assumptions for linear regression. To combat this, we performed a mathematical transformation by taking the log of the response variable. The resulting log transformed model did meet the visual and statistical assumption checks for linear regression by having normally distributed residuals and homoscedastic variance. Using this log model, we set out to determine which predictor variables best explain the response in total mass. 
+\t To determine how species and physiological characters predict biomass, we fit multiple linear models. We started by creating a full model using the entire subset of variables of interest, with total mass ($g$) as the response variable, and the predictor variables being the species of Sarracenia, feed level ($g$), specific leaf area ($cm^2/g$), chlorophyll a + b content ($mg/g$), photosynthetic rate ($nmol CO2 * g^-1 * s^-1$), number of phyllodes, and number of pitchers and phyllodes. The null model does not contain our predictor variables, only the response variable. We tested our full model for normality using Shapiro-Wilk test and for heteroscedasticity using Breusch-Pagan test. Unfortunately, the full model was non-normal & heteroscedastic, therefore did not meet the assumptions for linear regression (Figure 4). To combat this, we performed a mathematical transformation by taking the log of the response variable. The resulting log transformed model did meet the visual and statistical assumption checks for linear regression by having normally distributed residuals and homoscedastic variance (Figure 5). Using this log model, we set out to determine which predictor variables best explain the response in total mass. 
 \t We found that species alone is a good predictor of total mass. Figure 4: model 1, species (not enough)
 
 Assumption
@@ -66,23 +66,20 @@ k.  Model comparison using the null model, full model, and additional models fro
 ### Methods Figures & Code
 
 
-```{r}
+```{r fig-1}
 # Figure 1: visualize missing data
-gg_miss_var(plant) + labs(caption = "Figure 1.")
+gg_miss_var(plant) 
 
 ```
-**Figure 1: Visualizing variables with missing data in the Sarracinia data subset.** The variables chlorophyll, amass, sla, num_phylls, and num_lvs all have missing data, however, the missingness is relatively low.
+**Figure 1. Visualizing variables with missing data in the Sarracinia data subset.** The variables chlorophyll, amass, sla, num_phylls, and num_lvs all have missing data, however, the missingness is relatively low.
 
-```{r methods-code}
-# Figure 1: visualize missing data
-gg_miss_var(plant) + labs(caption = "Figure 1.")
-
-
+```{r subset}
 # creating a subset of the data dropping NA values shown in Figure 1
 plant_subset <- plant %>%  
   drop_na(sla, chlorophyll, amass, num_phylls, num_lvs)
+```
 
-
+```{r fig-2}
 # Figure 2: correlation plot
 # calculate Pearson's r for numerical values only
 plant_cor <- plant_subset %>% 
@@ -92,29 +89,41 @@ plant_cor <- plant_subset %>%
 corrplot(plant_cor,
          #change shape of cells 
          method = "ellipse",
-         addCoef.col = "black",
-         title = "Figure 2.") 
+         addCoef.col = "black") 
+```
+**Figure 2. Plot of correlation between variables.** These values were calculated using Pearson's r.
 
-
-# Figure 3: pair plot
+```{r fig-3}
+# Figure 3: "pair plot"
 plant_subset %>% 
   select(species:num_phylls) %>% 
   ggpairs()
+```
+**Figure 3. Pair plot.** 
 
+
+```{r full-model}
 # Full and null models of filtered data
 # null = no predictors
 null <- lm(totmass ~ 1, data = plant_subset)
 # full = response and all potential predictors 
 full <- lm(totmass ~ species + feedlevel + sla + chlorophyll + amass + num_lvs + num_phylls, data = plant_subset)
+```
 
+```{r full-vis}
 # Full model visual assumptions check
 par(mfrow = c(2,2))
-plot(full, caption = "Table x. Visual check of assumptions for the full model")
+plot(full)
+```
+**Figure 4. Visual check of assumptions for the full model**
 
+```{r full-stats}
 # Full model stats assumptions check 
 check_normality(full)
 check_heteroscedasticity(full)
+```
 
+```{r log-transform}
 # Log transformation of response variable for null and full models
 null_log <- lm(log(totmass) ~ 1, data = plant_subset)
 full_log <- lm(log(totmass) ~ species + feedlevel + sla + chlorophyll + amass + num_lvs + num_phylls, data = plant_subset)
@@ -123,11 +132,17 @@ full_log <- lm(log(totmass) ~ species + feedlevel + sla + chlorophyll + amass + 
 # Log model visual assumptions check
 par(mfrow = c(2,2))
 plot(full_log, caption = "Table x. Visual check of assumptions for the log model")
+```
+**Figure 5. Visual check of assumptions for the log model**
 
+```{r log-stats}
 # Log model stats assumptions check 
 check_normality(full_log)
 check_heteroscedasticity(full_log)
+```
 
+
+```{r methods-code}
 # Figure 4: model 1 
 # species predicts biomass?
 model1_log <- lm(log(totmass) ~ species, data = plant_subset)
