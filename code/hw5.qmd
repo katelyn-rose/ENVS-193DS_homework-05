@@ -11,18 +11,12 @@ execute:
   message: false
   warning: false
 editor: visual
-
 ---
 
 # Introduction
 
-What are Sarracenia?
-b. Why might people care about them?
-c. Why do you think it could be useful and/or important to predict individual biomass
-from morphological, physiological, or taxonomic characteristics?
-d. What questions are you addressing?
-e. What hypotheses are you testing?
-f. Include 3-5 in-text citations of peer-reviewed work.
+Sarracenia, commonly called pitcher plant, is a genus of carnivorous plants which attracts insects using extrafloral nectaries (Dress et al., 1997). The pitchers of Sarracenia contain chemicals like Coniine which can cause paralysis and death of insects (Mody et al., 1976). Carnivorous plants are unique because they receive a portion of their nutrition from active hunting of prey, and can therefore grow in places which typically have unsuitably poor soil for plants (Król et al., 2012). In this analysis, we are utilizing a dataset containing measurements of several Sarracenia morphological and physiological characteristics which were collected in Harvard Forest in 2005 (Ellison and Farnsworth, 2021). We seek to determine which characteristics are the best predictors of the total mass of a Sarracenia plant. If our hypothesis is supported, then at least one of the characteristics will predict biomass. 
+
 
 ### Introduction Code:
 
@@ -53,13 +47,11 @@ plant <- read_csv(here("data", "knb-lter-hfr.109.18","hf109-01-sarracenia.csv"))
 
 # Methods
 
-Ellison and Farnsworth (2021) conducted a manipulative feeding experiment with multiple species of Sarracenia to examine the effects of varying nutrient availability on multiple physiological factors. The resulting data was wrangled and uploaded to RStudio. We initially filtered the dataset to extract the variables most relevant to answering our research question: how do Sarracenia characteristics predict biomass? After initial wrangling and filtering, we began our analysis by creating a visualization of the missing data in our entire data subset (Figure 1). This figure brings attention to the missing values for several variables, however, the missingness is relatively low. In order to examine the relationships between the numerical variables in our dataset, we calculated Pearson's r and visually represented the correlation using a correlation plot (Figure 2). This correlation plot allows us to visually represent the possible correlations between our variables. To further understand the relationships between our variables, we created a pair plot of each variable compared against the others (Figure 3). 
+Ellison and Farnsworth (2021) conducted a manipulative feeding experiment with multiple species of Sarracenia to examine the effects of varying nutrient availability on multiple physiological factors. The resulting data was wrangled and uploaded to RStudio. We initially filtered the dataset to extract the variables most relevant to answering our research question: how do Sarracenia characteristics predict biomass? After initial wrangling and filtering, we began our analysis by creating a visualization of the missing data in our entire data subset (Figure 1). This figure brings attention to the missing values for several variables, however, the missingness is relatively low. In order to examine the relationships between the numerical variables in our dataset, we calculated Pearson's r and visually represented the correlation using a correlation plot (Figure 2). This correlation plot allows us to visually represent the possible correlations between our variables. To further understand the relationships between our variables, we created a pair plot of each variable compared against the others (Figure 3).
 
-To determine how species and physiological characters predict biomass, we fit multiple linear models. We started by creating a full model using the entire subset of variables of interest, with total mass ($g$) as the response variable, and the predictor variables being the species of Sarracenia, feed level ($g$), specific leaf area ($cm^2/g$), chlorophyll a + b content ($mg/g$), photosynthetic rate ($nmol CO2 * g^-1 * s^-1$), number of phyllodes, and number of pitchers and phyllodes. The null model does not contain our predictor variables, only the response variable. We tested our full model for normality using Shapiro-Wilk test and for heteroscedasticity using Breusch-Pagan test. Unfortunately, the full model was non-normal & heteroscedastic, therefore did not meet the assumptions for linear regression (Figure 4). To combat this, we performed a mathematical transformation by taking the log of the response variable. The resulting log transformed model did meet the visual and statistical assumption checks for linear regression by having normally distributed residuals and homoscedastic variance (Figure 5). Using this log model, we set out to determine which predictor variables best explain the response in total mass. 
+To determine how species and physiological characters predict biomass, we fit multiple linear models. We started by creating a full model using the entire subset of variables of interest, with total mass ($g$) as the response variable, and the predictor variables being the species of Sarracenia, feed level ($g$), specific leaf area ($cm^2/g$), chlorophyll a + b content ($mg/g$), photosynthetic rate ($nmol CO2 * g^-1 * s^-1$), number of phyllodes, and number of pitchers and phyllodes. The null model does not contain our predictor variables, only the response variable. We tested our full model for normality using Shapiro-Wilk test and for heteroscedasticity using Breusch-Pagan test. Unfortunately, the full model was non-normal & heteroscedastic, therefore did not meet the assumptions for linear regression (Figure 4). To combat this, we performed a mathematical transformation by taking the log of the response variable. The resulting log transformed model did meet the visual and statistical assumption checks for linear regression by having normally distributed residuals and homoscedastic variance (Figure 5). Using this log model, we set out to determine which predictor variables best explain the response in total mass.
 
-We found that species alone is a good predictor of total mass. Model 1, representing species as the sole predictor of biomass, conforms visually and statistically to the assumptions of linear regression (Figure 6). We chose this model due to the strong correlation between species and biomass. To create Model 2 we excluded the predictor variable that had the lowest correlation with biomass, which was number of phyllodes. Model 2 also has normally distributed residuals and homoscedastic variance (Figure 7). We hoped that excluding the variable with the weakest correlation would increase the simplicity of our results. Finally, we excluded several poorly correlated variables to create Model 3, including only the more strongly correlated variables of species, specific leaf area, feed level, chlorophyll, and number of pitchers and phyllodes. 
-To ensure accuracy of our interpretation, we evaluated multicolinearity by calculating the generalized Variance Inflation Factor and determined that there are no related predictors which inflate the data (Table 1). We then used Akaike Info Criterion (AIC) to compare our constructed models (Table 2).
-
+We found that species alone is a good predictor of total mass. Model 1, representing species as the sole predictor of biomass, conforms visually and statistically to the assumptions of linear regression (Figure 6). We chose this model due to the strong correlation between species and biomass. To create Model 2 we excluded the predictor variable that had the lowest correlation with biomass, which was number of phyllodes. Model 2 also has normally distributed residuals and homoscedastic variance (Figure 7). We hoped that excluding the variable with the weakest correlation would increase the simplicity of our results. Finally, we excluded several poorly correlated variables to create Model 3, including only the more strongly correlated variables of species, specific leaf area, feed level, chlorophyll, and number of pitchers and phyllodes. To ensure accuracy of our interpretation, we evaluated multicolinearity by calculating the generalized Variance Inflation Factor and determined that there are no related predictors which inflate the data (Table 1). We then used Akaike Info Criterion (AIC) to compare our constructed models (Table 2).
 
 ### Methods Figures & Code
 
@@ -68,6 +60,7 @@ To ensure accuracy of our interpretation, we evaluated multicolinearity by calcu
 gg_miss_var(plant) 
 
 ```
+
 **Figure 1. Visualizing variables with missing data in the Sarracinia data subset.** The variables chlorophyll, amass, sla, num_phylls, and num_lvs all have missing data, however, the missingness is relatively low.
 
 ```{r subset}
@@ -88,6 +81,7 @@ corrplot(plant_cor,
          method = "ellipse",
          addCoef.col = "black") 
 ```
+
 **Figure 2. Plot of correlation between variables.** These values were calculated using Pearson's r to represent the correlation between all of our variables of interest.
 
 ```{r pairs-plot}
@@ -96,6 +90,7 @@ plant_subset %>%
   select(species:num_phylls) %>% 
   ggpairs()
 ```
+
 **Figure 3. Pair plot.** This plot displays the relationships between our variables of interest.
 
 ```{r full-model}
@@ -111,6 +106,7 @@ full <- lm(totmass ~ species + feedlevel + sla + chlorophyll + amass + num_lvs +
 par(mfrow = c(2,2))
 plot(full)
 ```
+
 **Figure 4. Visual check of assumptions for the full model** This model shows non-normality of residuals and heteroscedasticity.
 
 ```{r full-stats}
@@ -129,6 +125,7 @@ full_log <- lm(log(totmass) ~ species + feedlevel + sla + chlorophyll + amass + 
 par(mfrow = c(2,2))
 plot(full_log)
 ```
+
 **Figure 5. Visual check of assumptions for the log model** The log transformed model shows normal residuals and homoscedasticity.
 
 ```{r log-stats}
@@ -136,7 +133,6 @@ plot(full_log)
 check_normality(full_log)
 check_heteroscedasticity(full_log)
 ```
-
 
 ```{r model1}
 # model 1, species predicts biomass?
@@ -147,6 +143,7 @@ model1_log <- lm(log(totmass) ~ species, data = plant_subset)
 par(mfrow = c(2,2))
 plot(model1_log)
 ```
+
 **Figure 6. Visual assumption check for Model 1.** This model shows normal residuals and homoscedasticity.
 
 ```{r model1-stat}
@@ -162,6 +159,7 @@ model2_log <- lm(log(totmass) ~ species + feedlevel + sla + chlorophyll + amass 
 par(mfrow = c(2,2))
 plot(model2_log)
 ```
+
 **Figure 6. Visual assumption check for Model 2.** This model shows normal residuals and homoscedasticity.
 
 ```{r}
@@ -170,7 +168,6 @@ check_normality(model2_log)
 check_heteroscedasticity(model2_log)
 ```
 
-
 ```{r model3}
 # model 3: species + sla + feedlevel + chlorophyll + num_lvs
 model3_log <- lm(log(totmass) ~ species + sla + feedlevel + chlorophyll + num_lvs, data = plant_subset)
@@ -178,6 +175,7 @@ model3_log <- lm(log(totmass) ~ species + sla + feedlevel + chlorophyll + num_lv
 par(mfrow = c(2,2))
 plot(model3_log)
 ```
+
 **Figure 6. Visual assumption check for Model 3.** This model shows normal residuals and homoscedasticity.
 
 ```{r model3-stats}
@@ -186,28 +184,26 @@ check_normality(model3_log)
 check_heteroscedasticity(model3_log)
 ```
 
-
 ```{r  vif}
 # Variance Inflation Factor (VIF) to evaluate multicolinearity
 car::vif(full_log)
 ```
-**Table 1. Variance Inflation Factor (VIF).** This table shows that there are no related predictors which inflate the data. 
+
+**Table 1. Variance Inflation Factor (VIF).** This table shows that there are no related predictors which inflate the data.
 
 ```{r aic}
 # Akaike Information Criterion (AIC)
 MuMIn::model.sel(full_log, null_log, model1_log, model2_log, model3_log)
 ```
-**Table 2. Akaike Information Criterion (AIC).**
+**Table 2. Akaike Information Criterion (AIC).** This ranks our models by simplicity. Model 3 is the simplest model which explains the most variance. 
 
 # Results
 
-We found that the Model 3 including the predictors species, specific leaf area, feed level, chlorophyll, and number of pitchers and phyllodes best predicted biomass. According to the AIC (Table 2), Model 3 the simplest model we created that explains the most variance. Model 1 with only species excludes other predictors which also have a strong correlation with biomass. Model 2 which removes only the number of phyllodes still leaves variables with weak correlation which negatively effect the accuracy of the overall model. All included variables in Model 3 show some level of correlation with biomass (Table 3). These predictors are also logical from a biological perspective. Species can be correlated to total mass because different species often have unique morphologies, such as size. Both specific leaf area and number of pitchers and phyllodes could be correlated to total mass because leaves of a greater area and abundance usually have more mass. A higher concentration of chlorophyll can also point to a larger, more established plant. 
+We found that the Model 3 including the predictors species, specific leaf area, feed level, chlorophyll, and number of pitchers and phyllodes best predicted biomass. According to the AIC (Table 2), Model 3 the simplest model we created that explains the most variance. Model 1 with only species excludes other predictors which also have a strong correlation with biomass. Model 2 which removes only the number of phyllodes still leaves variables with weak correlation which negatively effect the accuracy of the overall model. All included variables in Model 3 show some level of correlation with biomass (Table 3). These predictors are also logical from a biological perspective. Species can be correlated to total mass because different species often have unique morphologies, such as size. Both specific leaf area and number of pitchers and phyllodes could be correlated to total mass because leaves of a greater area and abundance usually have more mass. A higher concentration of chlorophyll can also point to a larger, more established plant.
 
 Within our model, we found the strongest predictor of total mass of a Sarracina plant to be the total number of pitchers and phyllodes it possesses (Table 3). We visually represented this relationship in Figure 7 which contains the predicted values of biomass for number of pitchers and phyllodes. We log transformed our response variable to meet assumptions, but we back transformed our results when creating our model prediction for ease of communication.
 
-
 ### Results Code
-
 
 ```{r}
 table <- tidy(model3_log, conf.int = TRUE) %>% 
@@ -224,14 +220,6 @@ table
 **Table 3. Summary of Model 3.**
 
 ```{r}
-# model three predictions
-model3_pred <- ggpredict(model3_log, terms = c("sla", "feedlevel", "chlorophyll", "num_lvs", "species"), back.transform = TRUE)
-
-model3_pred
-```
-**Table 4. Back transformed predictions for Model 3.**
-
-```{r}
 # model 3 predictions plot
 plot(ggpredict(model3_log, terms = "num_lvs", back.transform = TRUE), 
      add.data = TRUE) +
@@ -240,7 +228,16 @@ plot(ggpredict(model3_log, terms = "num_lvs", back.transform = TRUE),
        x = "Number of pitchers and phyllodes") +
   theme_classic()
 ```
+
 **Figure 7. Predicted values of total mass as a function of number of pitchers and phyllodes.**
 
-
 # Bibliography
+
+Dress, W. J., Newell, S. J., Nastase, A. J., &amp; Ford, J. C. (1997). Analysis of amino acids in nectar from pitchers of Sarracenia purpurea. American Journal of Botany, 84(12), 1701–1706. https://doi.org/10.2307/2446468 
+
+Ellison, A. and E. Farnsworth. 2021. Effects of Prey Availability on Sarracenia Physiology at Harvard Forest 2005 ver 18. Environmental Data Initiative. https://doi.org/10.6073/pasta/26b22d09279e62fd729ffc35f9ef0174.
+
+Elżbieta Król et al. 2012. Quite a few reasons for calling carnivores ‘the most wonderful plants in the world’, Annals of Botany, Volume 109, Issue 1, Pages 47–64, https://doi.org/10.1093/aob/mcr249
+
+Mody, N. V., Henson, R., Hedin, P. A., Kokpol, U., &amp; Miles, D. H. (1976, July 1). Isolation of the insect paralyzing agent coniine fromsarracenia flava. SpringerLink. https://link.springer.com/article/10.1007/BF02003710 
+
